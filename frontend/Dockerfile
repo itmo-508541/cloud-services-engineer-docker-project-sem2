@@ -1,4 +1,4 @@
-FROM node:22 AS build
+FROM node:18 AS build
 
 WORKDIR /srv
 COPY package.json package-lock.json ./
@@ -8,5 +8,5 @@ RUN NODE_OPTIONS=--openssl-legacy-provider npm run-script build
 
 FROM nginx:1.29-alpine3.23
 
-COPY --from=build /srv/dist/ /usr/share/nginx/html/momo-store/
+COPY --from=build /srv/dist/ /srv/
 EXPOSE 80
