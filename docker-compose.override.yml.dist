@@ -1,0 +1,11 @@
+services:
+    frontend:
+        image: !reset null # https://stackoverflow.com/a/76913131
+        build:
+            context: ./frontend
+            args:
+                NODE_ENV: development
+    backend:
+        image: !reset null
+        build:
+            context: ./backend
