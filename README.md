@@ -22,11 +22,24 @@
 
 Первый этап - сборка Vue-приложения на базе образа Node.js, второй - минимальный образ **nginx** (Alpine), куда копируется только содержимое каталога со статикой после `npm run build`. Итоговый размер образа на Docker Hub: **25.1 МБ**.
 
+build-аргументы сборки образа:
+
+* этапа сборки статики:
+    * `BASE_URL` - базовый URL для Vue Router (по умолчанию `/`
+    * `VUE_APP_API_URL` - префикс адреса API (по умолчанию `/api/`)
+    * `NODE_ENV` - режим сборки для Node/npm (по умолчанию `development`)
+* финальный этап
+    * `UID` - числовой идентификатор пользователя, под которым создаётся учётная запись `www-data` и запускается nginx (по умолчанию `1001`)
+
 Готовый образ: [itmo508541/docker-project-frontend:latest](https://hub.docker.com/repository/docker/itmo508541/docker-project-frontend/tags/latest).
 
 ### Сборка Backend
 
 Первый этап - компиляция Go-приложения в образе **golang** (Alpine), второй - лёгкий **alpine** с одним скомпилированным бинарником и минимальными зависимостями для healthcheck. Итоговый размер образа на Docker Hub: **34.1 МБ**.
+
+build-аргументы этапа сборки финального образа:
+
+* `UID` - числовой идентификатор пользователя, под которым создаётся учётная запись `www-data` и запускается приложение API (по умолчанию `1001`)
 
 Готовый образ: [itmo508541/docker-project-backend:latest](https://hub.docker.com/repository/docker/itmo508541/docker-project-backend/tags/latest).
 
