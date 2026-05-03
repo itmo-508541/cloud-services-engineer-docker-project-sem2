@@ -16,7 +16,7 @@ RUN npm clean-install --no-fund
 COPY . .
 RUN npm run-script build
 
-FROM nginx:1.28.3-alpine
+FROM nginx:1.30-alpine3.23-slim
 ARG UID=1001
 
 COPY --from=build /srv/dist/ /srv/
