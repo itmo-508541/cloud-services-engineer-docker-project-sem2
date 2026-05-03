@@ -40,6 +40,10 @@
 
 Пример запуска с тремя репликами backend: `docker compose up -d --build --scale backend=3`
 
+### Безопасность
+
+Для запуска контейнеров `frontend` и `backend` используются непривилегированные пользователи `www-data:nginx` и `www-data:www-data` соответственно.
+
 ## Контакты
 
 * Email: andrey@mindubaev.ru (cshmuch@mail.ru)

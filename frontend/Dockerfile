@@ -17,8 +17,13 @@ COPY . .
 RUN npm run-script build
 
 FROM nginx:1.28.3-alpine
+ARG UID=1001
 
 COPY --from=build /srv/dist/ /srv/
-EXPOSE 80
 
+RUN adduser -S -u ${UID} -G nginx www-data \
+        && chown -R www-data:nginx /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+
+USER www-data
+EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD nginx -t || exit 1
