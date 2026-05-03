@@ -1,4 +1,4 @@
-FROM node:18 AS build
+FROM node:22-alpine AS build
 
 ARG BASE_URL=/
 ARG VUE_APP_API_URL=/api/
@@ -12,11 +12,11 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 
 WORKDIR /srv
 COPY package.json package-lock.json ./
-RUN npm clean-install
+RUN npm clean-install --no-audit --no-fund
 COPY . .
 RUN npm run-script build
 
-FROM nginx:1.29-alpine3.23
+FROM nginx:1.28.3-alpine
 
 COPY --from=build /srv/dist/ /srv/
 EXPOSE 80
