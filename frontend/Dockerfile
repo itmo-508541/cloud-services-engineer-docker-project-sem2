@@ -21,8 +21,7 @@ ARG UID=1001
 
 COPY --from=build /srv/dist/ /srv/
 
-RUN adduser -S -u ${UID} -G nginx www-data \
-        && chown -R www-data:nginx /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+RUN adduser -S -u ${UID} -G nginx www-data
 
 USER www-data
 EXPOSE 80
