@@ -20,3 +20,5 @@ FROM nginx:1.29-alpine3.23
 
 COPY --from=build /srv/dist/ /srv/
 EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD nginx -t || exit 1
