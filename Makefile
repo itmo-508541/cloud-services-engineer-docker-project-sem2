@@ -1,12 +1,9 @@
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := up
 
-.PHONY: down build logs
+.PHONY: down up
 
 down:
-	docker compose down -v
+	docker compose down -v --rmi local
 
-build: down
+up:
 	docker compose up -d --build
-
-logs:
-	docker compose logs
