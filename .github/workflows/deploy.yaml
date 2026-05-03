@@ -57,7 +57,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
   run-with-docker-compose:
-    name: Push Docker image to DockerHub
+    name: Start project with Docker Compose
     runs-on: ubuntu-latest
     env:
       DOCKER_USER: ${{ secrets.DOCKER_USER }}
